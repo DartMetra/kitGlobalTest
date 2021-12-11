@@ -36,7 +36,7 @@ class UserService {
 
     public async updatePassword(email: string, updatePassId: string, password: string): Promise<void> {
         const passwordHash = await bcrypt.hash(password, 5);
-        await UserModel.findOneAndUpdate({ email, updatePassId }, { passwordHash, updatePassId: undefined });
+        await UserModel.findOneAndUpdate({ email, updatePassId }, { passwordHash, $unset: { updatePassId } });
     }
 }
 

@@ -4,6 +4,10 @@ import { IUser } from "../../@types/models";
 import bcrypt from "bcrypt";
 
 class UserService {
+    public async getClients(): Promise<IUser[]> {
+        return await UserModel.find({ isAdmin: false }, ["_id", "email", "fio", "money"]).lean();
+    }
+
     public async findUserByEmail(email: string): Promise<IUser | null> {
         return await UserModel.findOne({ email });
     }

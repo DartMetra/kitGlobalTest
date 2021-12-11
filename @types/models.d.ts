@@ -24,7 +24,7 @@ declare interface IOrder extends Document {
     updatedAt: Date;
 }
 
-declare interface ICleaner extends Document {
+declare interface IDryclean extends Document {
     name: string;
     description?: string;
     services: string[];

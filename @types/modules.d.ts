@@ -10,3 +10,9 @@ declare namespace NodeJS {
         SMTP_PASSWORD: string;
     }
 }
+
+declare namespace Express {
+    export interface Request {
+        user: IDecodedAccessToken;
+    }
+}

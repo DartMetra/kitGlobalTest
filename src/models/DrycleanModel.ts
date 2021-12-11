@@ -1,7 +1,7 @@
 import { Document, Schema, model, Types } from "mongoose";
-import { ICleaner } from "../../@types/models";
+import { IDryclean } from "../../@types/models";
 
-const CleanerSchema = new Schema(
+const DrycleanSchema = new Schema(
     {
         name: { type: String, required: true },
         description: { type: String },
@@ -14,6 +14,6 @@ const CleanerSchema = new Schema(
     }
 );
 
-const CleanerModel = model<ICleaner>("Cleaners", CleanerSchema);
+const DrycleanModel = model<IDryclean>("Drycleaners", DrycleanSchema);
 
-export default CleanerModel;
+export default DrycleanModel;

@@ -1,5 +1,6 @@
 import { ISession } from "../../@types/models";
 import SessionModel from "../models/SessionModel";
+import UserModel from "../models/UserModel";
 
 class SessionService {
     public async saveSession(userId: string, refreshToken: string): Promise<void> {
@@ -18,6 +19,13 @@ class SessionService {
 
     public async findSession(refreshToken: string): Promise<ISession | null> {
         return await SessionModel.findOne({ refreshToken });
+    }
+
+    public async logoutMany(email: string): Promise<void> {
+        const user = await UserModel.findOne({ email }).lean();
+        if (user) {
+            await SessionModel.deleteMany({ userId: user._id });
+        }
     }
 }
 

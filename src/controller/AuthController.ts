@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { IUser } from "../../@types/models";
 import ApiError from "../exceptions/ApiError";
+import MailService from "../services/MailService";
 import SessionService from "../services/SessionService";
 import TokenService from "../services/TokenService";
 import UserService from "../services/UserService";
+import { v4 } from "uuid";
 
 class AuthController {
     public async registerUser(req: Request, res: Response, next: NextFunction) {
@@ -77,7 +79,24 @@ class AuthController {
         }
         res.sendStatus(204);
     }
-    public async sendPasswordRecoveryEmail(req: Request, res: Response, next: NextFunction) {}
-    public async updatePassword(req: Request, res: Response, next: NextFunction) {}
+    public async sendPasswordRecoveryEmail(req: Request, res: Response, next: NextFunction) {
+        const email = req.body.email;
+        const updatePassId = v4();
+        await UserService.savePasswordRecoveryLink(email, updatePassId);
+        await MailService.sendChangePasswordMail(email, updatePassId);
+        res.sendStatus(200);
+    }
+    public async updatePassword(req: Request, res: Response, next: NextFunction) {
+        const email = req.body.email;
+        const password = req.body.password;
+        const updatePassId = req.params.updatePassId;
+        try {
+            await UserService.updatePassword(email, updatePassId, password);
+            await SessionService.logoutMany(email);
+            res.sendStatus(204);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 export default new AuthController();

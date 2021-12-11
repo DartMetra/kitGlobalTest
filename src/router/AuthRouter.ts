@@ -10,9 +10,9 @@ authRouter.post("/register", body("email").isEmail(), body("password").isLength(
 //auth
 authRouter.post("/login", body("email").isEmail(), body("password").isLength({ min: 4, max: 32 }), validationResultMiddleware, AuthController.login);
 //refresh session
-authRouter.post("/refresh");
+authRouter.post("/refresh", AuthController.refreshSession);
 //logout
-authRouter.post("/logout");
+authRouter.post("/logout", AuthController.logout);
 // send pass update email
 authRouter.post("/passwordrecovery"); //body: email
 

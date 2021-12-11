@@ -1,6 +1,8 @@
+import { Document } from "mongoose";
+
 declare interface IUser extends Document {
     email: string;
-    FIO: string;
+    fio: string;
     passwordHash: string;
     isAdmin: boolean;
     updatePassId: string;

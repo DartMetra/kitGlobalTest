@@ -1,4 +1,5 @@
 import { Document, Schema, model, Types } from "mongoose";
+import { ICleaner } from "../../@types/models";
 
 const CleanerSchema = new Schema(
     {

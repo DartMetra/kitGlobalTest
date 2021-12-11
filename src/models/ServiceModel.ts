@@ -1,4 +1,5 @@
 import { Document, Schema, model, Types } from "mongoose";
+import { IService } from "../../@types/models";
 
 const ServiceSchema = new Schema(
     {

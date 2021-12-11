@@ -7,10 +7,30 @@ declare interface IUser extends Document {
     money: number;
 }
 
-declare interface ISession extends Document {}
+declare interface ISession extends Document {
+    userId: string;
+    refreshToken: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
 
-declare interface IOrders extends Document {}
+declare interface IOrder extends Document {
+    userId: string;
+    status: "processing" | "fulfiled" | "rejected";
+    service: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
 
-declare interface ICleaner extends Document {}
+declare interface ICleaner extends Document {
+    name: string;
+    description?: string;
+    services: string[];
+    galery?: string[];
+    avatar?: string;
+}
 
-declare interface IServices extends Document {}
+declare interface IService extends Document {
+    name: string;
+    cost: number;
+}

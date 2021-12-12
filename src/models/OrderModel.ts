@@ -1,5 +1,5 @@
 import { Document, Schema, model, Types } from "mongoose";
-import { ISession } from "../../@types/models";
+import { IOrder } from "../../@types/models";
 
 const OrderSchema = new Schema(
     {
@@ -13,6 +13,6 @@ const OrderSchema = new Schema(
     }
 );
 
-const OrderModel = model<ISession>("Orders", OrderSchema);
+const OrderModel = model<IOrder>("Orders", OrderSchema);
 
 export default OrderModel;

@@ -1,12 +1,19 @@
 import OrderModel from "../models/OrderModel";
-import { IOrder } from "../../@types/models";
+import { IOrder, IService, IUser } from "../../@types/models";
 
 class OrderService {
-    public async getOrders(): Promise<IOrder[]> {
-        return await OrderModel.find().lean();
+    public async deleteById(id: string) {
+        await OrderModel.deleteOne({ _id: id });
     }
-    public async getOrder(id: string): Promise<IOrder> {
-        return await OrderModel.findById(id).lean();
+
+    public async getOrders(): Promise<IOrder[]> {
+        return await OrderModel.find().populate<{ services: IService[]; userId: IUser }>("services users");
+    }
+    public async getOrder(id: string) {
+        return await OrderModel.findById(id).populate<{ services: IService[]; userId: IUser }>("services users");
+    }
+    public async createOrder(userId: string, service: string) {
+        await OrderModel.create({ userId, service });
     }
 }
 

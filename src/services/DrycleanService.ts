@@ -1,12 +1,16 @@
-import { IDryclean } from "../../@types/models";
+import { IDryclean, IService } from "../../@types/models";
 import DrycleanModel from "../models/DrycleanModel";
+import ServiceModel from "../models/ServiceModel";
 
 class DrycleanService {
-    public async getDrycleans(): Promise<IDryclean> {
-        return await DrycleanModel.find().lean();
+    public async deleteById(id: string) {
+        await DrycleanModel.deleteOne({ _id: id });
     }
-    public async getDryclean(id: string): Promise<IDryclean> {
-        return await DrycleanModel.findById(id).lean();
+    public async getDrycleans(): Promise<IDryclean> {
+        return await DrycleanModel.find().populate<{ services: IService[] }>("services").lean();
+    }
+    public async getDryclean(id: string) {
+        return await DrycleanModel.findById(id).populate<{ services: IService[] }>("services").lean();
     }
     public async createDryclean(p: Partial<IDryclean>): Promise<void> {
         await DrycleanModel.create({ name: p.name, description: p.description, services: p.services, gallery: p.gallery, avatar: p.avatar });

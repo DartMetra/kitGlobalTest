@@ -4,6 +4,17 @@ import { IUser } from "../../@types/models";
 import bcrypt from "bcrypt";
 
 class UserService {
+    public async deleteById(id: string) {
+        await UserModel.deleteOne({ _id: id });
+    }
+
+    public async getMoney(id: string) {
+        return await UserModel.findById(id).select("money");
+    }
+    public async setMoney(id: string, money: number) {
+        await UserModel.updateOne({ _id: id }, { money });
+    }
+
     public async getClients(): Promise<IUser[]> {
         return await UserModel.find({ isAdmin: false }, ["_id", "email", "fio", "money"]).lean();
     }

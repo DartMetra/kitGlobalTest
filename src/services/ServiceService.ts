@@ -5,7 +5,9 @@ class ServiceService {
     public async getServices(): Promise<IService[]> {
         return await ServiceModel.find().lean();
     }
-    public async addService() {}
+    public async createService(name: string, cost: number): Promise<void> {
+        await ServiceModel.create({ name, cost });
+    }
 }
 
 export default new ServiceService();

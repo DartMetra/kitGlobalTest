@@ -5,8 +5,8 @@ const DrycleanSchema = new Schema(
     {
         name: { type: String, required: true },
         description: { type: String },
-        services: { type: [{ type: Types.ObjectId, ref: "Services" }], required: true },
-        galery: { type: [String] },
+        services: [{ type: Types.ObjectId, ref: "Services" }],
+        gallery: [String],
         avatar: { type: String },
     },
     {
@@ -14,6 +14,6 @@ const DrycleanSchema = new Schema(
     }
 );
 
-const DrycleanModel = model<IDryclean>("Drycleaners", DrycleanSchema);
+const DrycleanModel = model<IDryclean>("Drycleans", DrycleanSchema);
 
 export default DrycleanModel;

@@ -10,9 +10,14 @@ declare namespace NodeJS {
         SMTP_PASSWORD: string;
     }
 }
-
+export type file = { fieldname: string; originalname: string; encoding: string; mimetype: string; destination: string; filename: string; path: string; size: number };
+export interface IFiles {
+    avatar: [file];
+    gallery: [file];
+}
 declare namespace Express {
     export interface Request {
         user: IDecodedAccessToken;
+        files: IFiles;
     }
 }

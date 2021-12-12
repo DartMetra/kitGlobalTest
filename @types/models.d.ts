@@ -28,7 +28,7 @@ declare interface IDryclean extends Document {
     name: string;
     description?: string;
     services: string[];
-    galery?: string[];
+    gallery?: string[];
     avatar?: string;
 }
 

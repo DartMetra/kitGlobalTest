@@ -18,6 +18,8 @@ apiRouter.post("/drycleans", authMiddleware.checkAuth, authMiddleware.isAdmin, u
 apiRouter.post("/orders", authMiddleware.checkAuth, ApiController.createOrder);
 
 apiRouter.put("/services/:id", authMiddleware.checkAuth, authMiddleware.isAdmin, ApiController.updateService);
+apiRouter.put("/drycleans/:id", authMiddleware.checkAuth, authMiddleware.isAdmin, upload, ApiController.updateDryclean);
+apiRouter.patch("/orders/:id", authMiddleware.checkAuth, ApiController.updateOrderStatus);
 
 apiRouter.delete("/services/:id", authMiddleware.checkAuth, authMiddleware.isAdmin, ApiController.deleteService);
 apiRouter.delete("/drycleans/:id", authMiddleware.checkAuth, authMiddleware.isAdmin, ApiController.deleteDryclean);

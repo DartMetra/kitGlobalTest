@@ -130,6 +130,29 @@ class ApiController {
             next(e);
         }
     }
+    public async updateDryclean(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        const name = req.body.name;
+        const description = req.body.description;
+        const services = req.body.services.split(",");
+
+        try {
+            await DrycleanService.updateDryclean({ _id: id, name, description, services });
+            res.sendStatus(200);
+        } catch (e) {
+            next(e);
+        }
+    }
+    public async updateOrderStatus(req: Request, res: Response, next: NextFunction) {
+        const id = req.params.id;
+        const status = req.body.status as "processing" | "fulfiled" | "rejected";
+        try {
+            await OrderService.updateStatus(id, status);
+            res.sendStatus(200);
+        } catch (e) {
+            next(e);
+        }
+    }
 
     public async deleteDryclean(req: Request, res: Response, next: NextFunction) {
         const id = req.params.id;

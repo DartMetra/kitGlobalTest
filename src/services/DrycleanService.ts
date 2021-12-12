@@ -15,6 +15,9 @@ class DrycleanService {
     public async createDryclean(p: Partial<IDryclean>): Promise<void> {
         await DrycleanModel.create({ name: p.name, description: p.description, services: p.services, gallery: p.gallery, avatar: p.avatar });
     }
+    public async updateDryclean(p: Partial<IDryclean>) {
+        await DrycleanModel.updateOne({ _id: p._id }, { name: p.name, description: p.description, services: p.services, gallery: p.gallery, avatar: p.avatar });
+    }
 }
 
 export default new DrycleanService();
